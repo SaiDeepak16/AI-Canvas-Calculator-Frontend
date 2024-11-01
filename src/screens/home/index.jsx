@@ -94,8 +94,10 @@ export default function Home() {
             canvas.style.background = 'black';
             const ctx = canvas.getContext('2d');
             if (ctx) {
+                const x = e.nativeEvent ? e.nativeEvent.offsetX : e.clientX - canvas.offsetLeft;
+                const y = e.nativeEvent ? e.nativeEvent.offsetY : e.clientY - canvas.offsetTop;
                 ctx.beginPath();
-                ctx.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+                ctx.moveTo(x, y);
                 setIsDrawing(true);
             }
         }
@@ -110,7 +112,9 @@ export default function Home() {
             const ctx = canvas.getContext('2d');
             if (ctx) {
                 ctx.strokeStyle = color;
-                ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+                const x = e.nativeEvent ? e.nativeEvent.offsetX : e.clientX - canvas.offsetLeft;
+                const y = e.nativeEvent ? e.nativeEvent.offsetY : e.clientY - canvas.offsetTop;
+                ctx.lineTo(x, y);
                 ctx.stroke();
             }
         }
@@ -202,14 +206,18 @@ export default function Home() {
                 </Button>
             </div>
             <canvas
-                ref={canvasRef}
-                id='canvas'
-                className='absolute top-0 left-0 w-full h-full'
-                onMouseDown={startDrawing}
-                onMouseMove={draw} 
-                onMouseUp={stopDrawing}
-                onMouseOut={stopDrawing}
-            />
+    ref={canvasRef}
+    id='canvas'
+    className='absolute top-0 left-0 w-full h-full'
+    onMouseDown={startDrawing}
+    onMouseMove={draw}
+    onMouseUp={stopDrawing}
+    onMouseOut={stopDrawing}
+    onTouchStart={(e) => startDrawing(e.touches[0])} // Handle touch start
+    onTouchMove={(e) => draw(e.touches[0])}          // Handle touch move
+    onTouchEnd={stopDrawing}                         // Handle touch end
+/>
+
 
             {latexExpression && latexExpression.map((latex, index) => (
                 <Draggable
