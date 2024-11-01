@@ -46,6 +46,8 @@ export default function Home() {
       if (ctx) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight - canvas.offsetTop;
+        ctx.fillStyle = "black"; // Set the initial background color to black
+        ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the canvas with the color  
         ctx.lineCap = "round";
         ctx.lineWidth = 3;
       }
