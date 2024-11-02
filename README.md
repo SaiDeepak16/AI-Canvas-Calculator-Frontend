@@ -15,26 +15,48 @@ This project is a canvas drawing app that allows users to draw mathematical expr
 
 ## Developer Setup
 
-### Prerequisites
-- **Node.js** and **npm**: Make sure these are installed.
+#### Prerequisites
+Ensure **Node.js** (>= 14.0) and **npm** are installed.
 
-### Installation
-
-1. Clone the repository and navigate to the project directory.
+#### Installation
+1. Clone the repository:
    ```bash
    git clone https://github.com/SaiDeepak16/AI-Canvas-Calculator-Frontend
    cd AI-Canvas-Calculator-Frontend
    ```
 
-2. Install the dependencies for the frontend:
+2. Install the necessary dependencies:
    ```bash
    npm install
    ```
 
-3. Configure environment variables:
-   - Set up `VITE_API_URL` in a `.env` file to point to your backend URL.
+3. For frontend styling and functionality, install these libraries if not yet included:
+   ```bash
+   npm install tailwindcss postcss react-draggable @mantine/core axios
+   ```
 
-4. Start the development server:
+4. Set up Tailwind and PostCSS configurations by creating **`tailwind.config.js`** and **`postcss.config.js`** files if they aren't present:
+   - In **`tailwind.config.js`**:
+     ```js
+     module.exports = {
+       content: ["./src/**/*.{js,ts,jsx,tsx}"],
+       theme: {
+         extend: {},
+       },
+       plugins: [],
+     };
+     ```
+   - In **`postcss.config.js`**:
+     ```js
+     module.exports = {
+       plugins: {
+         tailwindcss: {},
+         autoprefixer: {},
+       },
+     };
+     ```
+
+5. Run the project:
    ```bash
    npm run dev
    ```
